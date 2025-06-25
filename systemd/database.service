@@ -9,7 +9,7 @@ Group=dev
 WorkingDirectory=/home/dev/coding/book/database
 ExecStartPre=/bin/mkdir -p /var/run/database
 ExecStartPre=/bin/chown dev:dev /var/run/database
-ExecStart=/usr/bin/node dist/index.js
+ExecStart=/usr/bin/node ?
 Restart=always
 RestartSec=10
 Environment=NODE_ENV=production
