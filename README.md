@@ -1,3 +1,3 @@
 # book
 
-echo "hand" | nc -U ./backend.sock
+echo "hand" | nc -U /var/run/backend/backend.sock
