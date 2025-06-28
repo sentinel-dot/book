@@ -39,3 +39,18 @@ SELECT User, Host FROM mysql.user WHERE User = 'dev';
 EXIT;
 
 
+
+
+
+
+
+
+
+#Initialize frontend
+cd ../  # Go back to root
+npx create-next-app@latest frontend --typescript --tailwind --eslint --app --src-dir --import-alias "@/*"
+cd frontend
+
+# Install additional dependencies
+npm install axios 
+npm install -D @types/node
