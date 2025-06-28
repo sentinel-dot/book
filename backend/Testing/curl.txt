@@ -1,0 +1,5 @@
+# Root-Endpoint testen
+curl http://localhost:5000/
+
+# Health-Check-Endpoint testen
+curl http://localhost:5000/health
