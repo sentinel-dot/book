@@ -1,0 +1,1 @@
+// Types for the different database tables
