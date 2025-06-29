@@ -383,26 +383,6 @@ export interface ResetPasswordConfirm {
   password: string;
 }
 
-// Query types
-export interface BookingQuery {
-  business_id?: number;
-  staff_member_id?: number;
-  service_id?: number;
-  date_from?: Date;
-  date_to?: Date;
-  status?: string;
-  customer_email?: string;
-  page?: number;
-  limit?: number;
-}
-
-export interface AvailabilityQuery {
-  business_id?: number;
-  staff_member_id?: number;
-  date: Date;
-  service_id?: number;
-}
-
 
 export interface DatabaseConfig {
   host: string;
@@ -628,9 +608,6 @@ export interface AvailabilityQuery {
   date: Date;
   service_id?: number;
 }
-
-// Utility types
-export type DatabaseConnection = any; // Replace with actual MySQL connection type
 
 export interface DatabaseConfig {
   host: string;
