@@ -38,7 +38,12 @@ SELECT User, Host FROM mysql.user WHERE User = 'dev';
 -- Exit MySQL
 EXIT;
 
+## Insert into database
+# Navigate to your project directory where the SQL file is saved
+cd book
 
+# Execute the SQL file
+mysql -u root -p bookdb < backend/src/config/schema.sql
 
 
 
