@@ -31,7 +31,7 @@ export default function HomePage() {
     };
 
     checkBackendConnection();
-  }, []); // Wofür?
+  }, []); // Wofür? -> damit es nur einmal pro seite aufgerufen wird?
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
