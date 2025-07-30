@@ -11,6 +11,7 @@ const router = express.Router();
 
 // POST /auth/register
 router.post('/register', async(req, res) => {
+    console.log("Received request: POST /auth/register");
     try {
         const { email, password, first_name, last_name, role = 'owner' }: UserCreateInput & { password: string } = req.body;
 
@@ -76,6 +77,7 @@ router.post('/register', async(req, res) => {
             } as AuthResponse,
             message: 'User registered successfully'
         });
+        console.log("Response sent | User registered");
     } catch (error) {
         console.error('Registration error:', error);
         res.status(500).json({
@@ -87,6 +89,7 @@ router.post('/register', async(req, res) => {
 
 // POST /auth/login
 router.post('/login', async (req, res) => {
+    console.log("Received request: POST /auth/login");
     try {
         const { email, password }: LoginCredentials = req.body;
 
@@ -149,6 +152,7 @@ router.post('/login', async (req, res) => {
             } as AuthResponse,
             message: 'Login successful'
         });
+        console.log("Response sent | User logged in");
 
     } catch (error) {
         console.error('Login error', error);
@@ -161,6 +165,7 @@ router.post('/login', async (req, res) => {
 
 // POST /auth/refresh
 router.post('/refresh', async(req, res) => {
+    console.log("Received request: POST /auth/refresh");
     try {
         const { refreshToken } = req.body;
 
@@ -204,6 +209,7 @@ router.post('/refresh', async(req, res) => {
                 refreshToken, newRefreshToken
             } as AuthResponse
         });
+        console.log("Response sent | Refresh successful");
     } catch (error) {
         console.error('Token refresh error:', error);
         res.status(401).json({
@@ -215,15 +221,18 @@ router.post('/refresh', async(req, res) => {
 
 // POST /auth/logout
 router.post('/logout', authenticateToken, async (req, res) => {
+    console.log("Received request: POST /auth/logout");
     // in productive app the token would go to a blacklist
     res.json({
         success: true,
         message: 'Logged out successfully'
     });
+    console.log("Response sent | User logged out");
 });
 
 // GET /auth/me
 router.get('/me', authenticateToken, async(req, res) => {
+    console.log("Received request: GET /auth/me");
     try {
         if (!req.user) {
             return res.status(401).json({
@@ -253,6 +262,7 @@ router.get('/me', authenticateToken, async(req, res) => {
             data: users[0],
             message: 'User profile retrieved successfully'
         });
+        console.log("Response sent | User me");
     } catch (error) {
         console.error('Get profile error:', error);
         res.status(500).json({

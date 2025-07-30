@@ -26,8 +26,9 @@ app.use(express.urlencoded({ extended: true })); // ?
 
 // Basic routes
 app.get('/', (req, res) => {
+    console.log("Request received: GET /")
     res.json({ 
-        message: 'OpenTable Clone Backend API', 
+        message: 'Book Backend API', 
         version: '1.0.0',
         endpoints: {
             health: '/health',
@@ -37,12 +38,14 @@ app.get('/', (req, res) => {
 });
 
 app.get('/health', (req, res) => {
+    console.log("Received request: GET /health");
     res.json({ 
         status: 'HEALTHY', 
         timestamp: new Date().toISOString(),
         uptime: process.uptime(),
         environment: process.env.NODE_ENV
     });
+    console.log("Response sent");
 });
 
 // API routes
@@ -74,6 +77,7 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 
 // Start the server
 const startServer = async () => {
+    console.log('Starting server...');
     try {
         // Test database connection
         await createDatabaseConnection();
