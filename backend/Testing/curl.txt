@@ -3,3 +3,12 @@ curl http://localhost:5000/
 
 # Health-Check-Endpoint testen
 curl http://localhost:5000/health
+
+# 1. Alle Businesses abrufen (öffentlich)
+curl -X GET http://localhost:5000/businesses \
+  -H "Content-Type: application/json" \
+  | jq .
+
+# 2. Business über Slug abrufen (Restaurant)
+curl -X GET http://localhost:5000/business/bella-vista \
+  -H "Content-Type: application/json" \
