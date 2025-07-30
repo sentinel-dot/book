@@ -5,6 +5,8 @@ import { createDatabaseConnection } from './config/database';
 
 // Import routes
 import authRoutes from './routes/auth';
+import businessRoutes from './routes/business';
+import businessSingleRoutes from './routes/business-single';
 
 dotenv.config();
 
@@ -50,6 +52,8 @@ app.get('/health', (req, res) => {
 
 // API routes
 app.use('/auth', authRoutes);
+app.use('/businesses', businessRoutes);
+app.use('/business', businessSingleRoutes);
 
 
 // 404 handler
@@ -102,6 +106,8 @@ const startServer = async () => {
             console.log(`   POST /auth/refresh - Token refresh`);
             console.log(`   POST /auth/logout - User logout`);
             console.log(`   GET  /auth/me - Get current user`);
+            console.log(`   GET  /businesses - Get all businesses`);
+            console.log(`   GET  /business/:slug - Get business by slug`);
         });
     } catch (error) {
         console.error('Failed to start server:', error);
