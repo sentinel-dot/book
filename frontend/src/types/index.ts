@@ -474,3 +474,4 @@ export interface NotificationSettings {
   sms_booking_cancelled: boolean;
   sms_booking_reminder: boolean;
 }
+

@@ -5,8 +5,7 @@ import { createDatabaseConnection } from './config/database';
 
 // Import routes
 import authRoutes from './routes/auth';
-import businessRoutes from './routes/business';
-import businessSingleRoutes from './routes/business-single';
+import bizRoutes from './routes/biz';
 
 dotenv.config();
 
@@ -30,10 +29,11 @@ app.use(express.urlencoded({ extended: true })); // ?
 app.get('/', (req, res) => {
     console.log("Request received: GET /")
     res.json({ 
-        message: 'Book Backend API', 
+        message: 'EasySeat Backend API', 
         version: '1.0.0',
         endpoints: {
             health: '/health',
+            biz: '/biz/*',
             auth: '/auth/*',
         }
     });
@@ -52,8 +52,8 @@ app.get('/health', (req, res) => {
 
 // API routes
 app.use('/auth', authRoutes);
-app.use('/businesses', businessRoutes);
-app.use('/business', businessSingleRoutes);
+app.use('/biz', bizRoutes);
+
 
 
 // 404 handler
@@ -85,7 +85,7 @@ const startServer = async () => {
     try {
         // Test database connection
         await createDatabaseConnection();
-        console.log('✅ Database connection established');
+        console.log('✅ Database connection Test successful!');
 
         // Validate required environment variables
         const requiredEnvVars = ['JWT_SECRET', 'JWT_REFRESH_SECRET'];
@@ -100,14 +100,15 @@ const startServer = async () => {
             console.log(`🌍 Environment: ${process.env.NODE_ENV}`);
             console.log(`🔗 CORS enabled for: ${process.env.FRONTEND_URL}`);
             console.log('\n📚 Available endpoints:');
+            console.log(`   GET  / - Info check`);
             console.log(`   GET  /health - Health check`);
             console.log(`   POST /auth/register - User registration`);
             console.log(`   POST /auth/login - User login`);
             console.log(`   POST /auth/refresh - Token refresh`);
             console.log(`   POST /auth/logout - User logout`);
             console.log(`   GET  /auth/me - Get current user`);
-            console.log(`   GET  /businesses - Get all businesses`);
-            console.log(`   GET  /business/:slug - Get business by slug`);
+            console.log(`   GET  /biz/all - Get all businesses`);
+            console.log(`   GET  /biz/:slug - Get business by slug`);
         });
     } catch (error) {
         console.error('Failed to start server:', error);
