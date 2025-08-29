@@ -6,6 +6,7 @@ import { createDatabaseConnection } from './config/database';
 // Import routes
 import authRoutes from './routes/auth';
 import bizRoutes from './routes/biz';
+import availabilityRoutes from './routes/availability';
 
 dotenv.config();
 
@@ -35,6 +36,7 @@ app.get('/', (req, res) => {
             health: '/health',
             biz: '/biz/*',
             auth: '/auth/*',
+            availability: '/availability/*'
         }
     });
 });
@@ -53,6 +55,7 @@ app.get('/health', (req, res) => {
 // API routes
 app.use('/auth', authRoutes);
 app.use('/biz', bizRoutes);
+app.use('/availability', availabilityRoutes);
 
 
 
@@ -109,6 +112,8 @@ const startServer = async () => {
             console.log(`   GET  /auth/me - Get current user`);
             console.log(`   GET  /biz/all - Get all businesses`);
             console.log(`   GET  /biz/:slug - Get business by slug`);
+            console.log(`   GET  /availability/:businessSlug/:serviceId - Get availability for service`);
+            console.log(`   GET  /availability/:businessSlug/week - Get week availability`);
         });
     } catch (error) {
         console.error('Failed to start server:', error);
