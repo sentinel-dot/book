@@ -7,6 +7,7 @@ import { createDatabaseConnection } from './config/database';
 import authRoutes from './routes/auth';
 import bizRoutes from './routes/biz';
 import availabilityRoutes from './routes/availability';
+import bookingRoutes from './routes/booking';
 
 dotenv.config();
 
@@ -36,7 +37,8 @@ app.get('/', (req, res) => {
             health: '/health',
             biz: '/biz/*',
             auth: '/auth/*',
-            availability: '/availability/*'
+            availability: '/availability/*',
+            bookings: '/booking/*'
         }
     });
 });
@@ -56,6 +58,7 @@ app.get('/health', (req, res) => {
 app.use('/auth', authRoutes);
 app.use('/biz', bizRoutes);
 app.use('/availability', availabilityRoutes);
+app.use('/booking', bookingRoutes);
 
 
 
@@ -114,6 +117,13 @@ const startServer = async () => {
             console.log(`   GET  /biz/:slug - Get business by slug`);
             console.log(`   GET  /availability/:businessSlug/:serviceId - Get availability for service`);
             console.log(`   GET  /availability/:businessSlug/week - Get week availability`);
+            console.log(`   POST /bookings - Create new booking`);
+            console.log(`   GET  /bookings - Get bookings (protected)`);
+            console.log(`   GET  /bookings/:id - Get single booking`);
+            console.log(`   PUT  /bookings/:id - Update booking (protected)`);
+            console.log(`   DELETE /bookings/:id - Cancel booking`);
+            console.log(`   GET  /bookings/upcoming/:businessId - Get upcoming bookings (protected)`);
+            console.log(`   GET  /bookings/stats/:businessId - Get booking statistics (protected)`);
         });
     } catch (error) {
         console.error('Failed to start server:', error);
