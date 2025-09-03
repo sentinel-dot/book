@@ -7,7 +7,7 @@ import { createDatabaseConnection } from './config/database';
 import authRoutes from './routes/auth';
 import bizRoutes from './routes/biz';
 import availabilityRoutes from './routes/availability';
-import bookingRoutes from './routes/booking';
+import bookRoutes from './routes/book';
 
 dotenv.config();
 
@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
             biz: '/biz/*',
             auth: '/auth/*',
             availability: '/availability/*',
-            bookings: '/booking/*'
+            bookings: '/book/*'
         }
     });
 });
@@ -58,7 +58,7 @@ app.get('/health', (req, res) => {
 app.use('/auth', authRoutes);
 app.use('/biz', bizRoutes);
 app.use('/availability', availabilityRoutes);
-app.use('/booking', bookingRoutes);
+app.use('/book', bookRoutes);
 
 
 
@@ -110,20 +110,14 @@ const startServer = async () => {
             console.log(`   GET  /health - Health check`);
             console.log(`   POST /auth/register - User registration`);
             console.log(`   POST /auth/login - User login`);
-            console.log(`   POST /auth/refresh - Token refresh`);
-            console.log(`   POST /auth/logout - User logout`);
-            console.log(`   GET  /auth/me - Get current user`);
             console.log(`   GET  /biz/all - Get all businesses`);
             console.log(`   GET  /biz/:slug - Get business by slug`);
-            console.log(`   GET  /availability/:businessSlug/:serviceId - Get availability for service`);
-            console.log(`   GET  /availability/:businessSlug/week - Get week availability`);
-            console.log(`   POST /bookings - Create new booking`);
-            console.log(`   GET  /bookings - Get bookings (protected)`);
-            console.log(`   GET  /bookings/:id - Get single booking`);
-            console.log(`   PUT  /bookings/:id - Update booking (protected)`);
-            console.log(`   DELETE /bookings/:id - Cancel booking`);
-            console.log(`   GET  /bookings/upcoming/:businessId - Get upcoming bookings (protected)`);
-            console.log(`   GET  /bookings/stats/:businessId - Get booking statistics (protected)`);
+            console.log(`   GET  /availability/:businessSlug/:serviceId - Get availability`);
+            console.log(`   POST /book - Create booking (PUBLIC)`);
+            console.log(`   GET  /book/:id - Get booking (PUBLIC)`);
+            console.log(`   DELETE /book/:id - Cancel booking (PUBLIC)`);
+            console.log(`   GET  /book - Get all bookings (PROTECTED)`);
+            console.log(`   PUT  /book/:id - Update booking (PROTECTED)`);
         });
     } catch (error) {
         console.error('Failed to start server:', error);
